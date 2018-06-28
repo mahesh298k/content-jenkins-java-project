@@ -13,31 +13,31 @@ pipeline {
         sayHello 'Awesome Student!'
       }
     }
-    stage('Git Information') {
+    /*stage('Git Information') {
       agent any
 
       steps {
         echo "My Branch Name: ${env.BRANCH_NAME}"
 
         script {
-          def myLib = new linuxacademy.git.gitStuff();
+          def myLib = new mahesh298k.git.gitStuff();
 
           echo "My Commit: ${myLib.gitCommit("${env.WORKSPACE}/.git")}"
         }
       }
-    }
-    stage('Unit Tests') {
+    } */
+    /*stage('Unit Tests') {
       agent {
-        label 'apache'
+        label 'JK-Slave-1'
       }
       steps {
         sh 'ant -f test.xml -v'
         junit 'reports/result.xml'
       }
-    }
+    } */
     stage('build') {
       agent {
-        label 'apache'
+        label 'JK-Slave-1'
       }
       steps {
         sh 'ant -f build.xml -v'
@@ -48,9 +48,9 @@ pipeline {
         }
       }
     }
-    stage('deploy') {
+    /*stage('deploy') {
       agent {
-        label 'apache'
+        label 'JK-Slave-1'
       }
       steps {
         sh "if ![ -d '/var/www/html/rectangles/all/${env.BRANCH_NAME}' ]; then mkdir /var/www/html/rectangles/all/${env.BRANCH_NAME}; fi"
@@ -77,7 +77,7 @@ pipeline {
     }
     stage('Promote to Green') {
       agent {
-        label 'apache'
+        label 'JK-Slave-1'
       }
       when {
         branch 'master'
@@ -88,7 +88,7 @@ pipeline {
     }
     stage('Promote Development Branch to Master') {
       agent {
-        label 'apache'
+        label 'JK-Slave-1'
       }
       when {
         branch 'development'
@@ -115,7 +115,7 @@ pipeline {
             subject: "${env.JOB_NAME} [${env.BUILD_NUMBER}] Development Promoted to Master",
             body: """<p>'${env.JOB_NAME} [${env.BUILD_NUMBER}]' Development Promoted to Master":</p>
             <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
-            to: "brandon@linuxacademy.com"
+            to: "mahesh298k@gmail.com"
           )
         }
       }
@@ -127,8 +127,9 @@ pipeline {
         subject: "${env.JOB_NAME} [${env.BUILD_NUMBER}] Failed!",
         body: """<p>'${env.JOB_NAME} [${env.BUILD_NUMBER}]' Failed!":</p>
         <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
-        to: "brandon@linuxacademy.com"
+        to: "mahesh298k@gmail.com"
       )
     }
   }
 }
+*/
