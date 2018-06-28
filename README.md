@@ -1,2 +1,2 @@
-# java-project BY MAHESH K
+# java-project BY MAHESH
 Java Project for Jenkins Course
