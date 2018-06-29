@@ -48,6 +48,9 @@ pipeline {
         }
       }
     }
+  }
+}
+
     /*stage('deploy') {
       agent {
         label 'JK-Slave-1'
@@ -131,6 +134,4 @@ pipeline {
       )
     }
   }
-}
-*/
-}
+}*/
