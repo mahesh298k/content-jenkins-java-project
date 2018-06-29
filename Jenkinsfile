@@ -26,7 +26,7 @@ pipeline {
         }
       }
     } */
-    /*stage('Unit Tests') {
+    stage('Unit Tests') {
       agent {
         label 'JK-Slave-1'
       }
@@ -34,7 +34,7 @@ pipeline {
         sh 'ant -f test.xml -v'
         junit 'reports/result.xml'
       }
-    } */
+    }
     stage('build') {
       agent {
         label 'JK-Slave-1'
