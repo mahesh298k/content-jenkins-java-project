@@ -6,14 +6,14 @@ pipeline {
   }
 
   stages {
-  /*  stage('Say Hello') {
+   stage('Say Hello') {
       agent any
 
       steps {
         sayHello 'Awesome Student!'
       }
     }
-    /*stage('Git Information') {
+    stage('Git Information') {
       agent any
 
       steps {
@@ -25,7 +25,7 @@ pipeline {
           echo "My Commit: ${myLib.gitCommit("${env.WORKSPACE}/.git")}"
         }
       }
-    } */
+    }
     stage('Unit Tests') {
       agent {
         label 'JK-Slave-1'
