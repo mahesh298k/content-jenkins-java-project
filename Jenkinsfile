@@ -41,6 +41,11 @@ pipeline {
       steps {
         sh 'ant -f build.xml -v'
       }
+      post {
+        success {
+          archiveArtifacts artifacts: 'dist/*.jar', fingerprint: true
+        }
+      }
     }
 
     stage('deploy') {
@@ -56,6 +61,15 @@ pipeline {
     stage("Running on CentOS") {
       agent {
         label 'JK-Slave-1'
+      }
+      steps {
+        sh "wget http://maheshkumar1.mylabserver.com/rectangles/all/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
+        sh "java -jar rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar 3 4"
+      }
+    }
+    stage('Testing on Debian') {
+      agent {
+        docker 'openjdk:8u171-jre'
       }
       steps {
         sh "wget http://maheshkumar1.mylabserver.com/rectangles/all/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
