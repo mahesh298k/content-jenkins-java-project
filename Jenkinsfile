@@ -6,7 +6,7 @@ pipeline {
   }
 
   stages {
-  /*  stage('Say Hello') {
+   stage('Say Hello') {
       agent any
 
       steps {
