@@ -1,8 +1,5 @@
 pipeline {
-  agent {
-    label 'master'
-  }
-
+  agent 'none'
   environment {
     MAJOR_VERSION = 1
   }
@@ -29,12 +26,18 @@ pipeline {
       }
     }*/
     stage('Unit Tests') {
+      agent {
+        label 'apache'
+      }
       steps {
         sh 'ant -f test.xml -v'
         junit 'reports/result.xml'
       }
     }
     stage('build') {
+      agent {
+        label 'apache'
+      }
       steps {
         sh 'ant -f build.xml -v'
       }
@@ -46,24 +49,27 @@ pipeline {
     }
 
     stage('deploy') {
+      agent {
+        label 'apache'
+      }
       steps {
         //sh "if ![ -d '/var/www/html/rectangles/all/${env.BRANCH_NAME}' ]; then mkdir /var/www/html/rectangles/all/${env.BRANCH_NAME}; fi"
         sh "cp dist/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar /var/www/html/rectangles/all/"
       }
     }
-  }
-}
 
-    /*stage("Running on CentOS") {
+    stage("Running on CentOS") {
       agent {
-        label 'CentOS'
+        label 'JK-Slave-1'
       }
       steps {
-        sh "wget http://brandon4231.mylabserver.com/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
+        sh "wget http://maheshkumar1.mylabserver.com/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
         sh "java -jar rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar 3 4"
       }
     }
-    stage("Test on Debian") {
+  }
+}
+    /*stage("Test on Debian") {
       agent {
         docker 'openjdk:8u121-jre'
       }
