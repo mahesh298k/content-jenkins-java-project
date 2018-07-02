@@ -63,11 +63,6 @@ pipeline {
       }
     }
   }
-  post {
-    success {
-      archiveArtifacts artifacts: 'dist/*.jar', fingerprint: true
-    }
-  }
 }
     /*stage("Test on Debian") {
       agent {
